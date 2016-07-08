@@ -1,0 +1,24 @@
+---
+- name: Checking rabbitmqadmin is installed
+  stat:
+    path: /usr/sbin/rabbitmqadmin
+  register: file_check
+
+- debug: var=rabbitmqadmin_check verbosity=2
+
+- name: Installing rabbitmqadmin
+  get_url:
+    url: http://guest:guest@localhost:15672/cli/rabbitmqadmin
+    mode: 0440
+    dest: /tmp/
+  when: not file_check.stat.exists
+
+- name: Moving rabbitmqadmin to /usr/sbin/
+  shell: mv /tmp/rabbitmqadmin /usr/sbin
+  when: not file_check.stat.exists
+
+- name: Making executable rabbitmqadmin
+  file:
+    mode: a+x
+    path: /usr/sbin/rabbitmqadmin
+  when: not file_check.stat.exists

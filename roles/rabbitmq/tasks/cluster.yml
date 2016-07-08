@@ -1,0 +1,39 @@
+---
+- name: Stoping rabbitmq-server
+  service:
+    name: rabbitmq-server
+    state: stopped
+
+- name: Coping erlang cookie
+  template:
+    src: erlang.cookie.j2
+    dest: "{{ rabbitmq_erlang_cookie_file }}"
+    owner: rabbitmq
+    group: rabbitmq
+    mode: 0400
+    backup: yes
+
+- name: Starting rabbitmq-server
+  service:
+    name: rabbitmq-server
+    state: started
+
+- name: Stopping rabbitmq app
+  command: rabbitmqctl stop_app
+  when: inventory_hostname != "{{ rabbitmq_cluster_master }}"
+
+- name: Resetting rabbitmq app
+  command: rabbitmqctl reset
+  when: inventory_hostname != "{{ rabbitmq_cluster_master }}"
+
+- name: Joining rabbitmq cluster
+  command: rabbitmqctl join_cluster 'rabbit@{{ hostvars[rabbitmq_cluster_master].ansible_hostname }}'
+  when: inventory_hostname != "{{ rabbitmq_cluster_master }}"
+
+- name: Starting rabbitmq app
+  command: rabbitmqctl start_app
+  when: inventory_hostname != "{{ rabbitmq_cluster_master }}"
+
+- name: Setting HA policy
+  command: rabbitmqctl set_policy ha-all '^(?!amq\.).*' '{"ha-mode":"all"}'
+

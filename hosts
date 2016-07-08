@@ -1,0 +1,8 @@
+[rabbitmq_nodes]
+node1 ansible_host=192.168.123.152
+#node2 ansible_host=192.168.123.153
+#node3 ansible_host=192.168.123.154
+
+#[rabbitmq_nodes:vars]
+#rabbitmq_enable_cluster=true
+#rabbitmq_cluster_master=node1

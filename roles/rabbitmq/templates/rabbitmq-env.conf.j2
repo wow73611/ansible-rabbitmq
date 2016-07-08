@@ -1,0 +1,4 @@
+{% for key, value in rabbitmq_env_conf.iteritems() %}
+{{ key | upper }}="{{ value }}"
+{% endfor %}
+

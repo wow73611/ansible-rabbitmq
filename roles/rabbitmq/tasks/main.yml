@@ -1,0 +1,13 @@
+---
+- include: hostname.yml
+
+- include: install.yml
+
+#- include: ssl.yml
+
+- include: cluster.yml
+  when: rabbitmq_enable_cluster
+
+- include: config.yml
+
+- include: rabbitmqadmin.yml

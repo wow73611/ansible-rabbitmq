@@ -1,0 +1,5 @@
+---
+- name: Deploy rabbitmq service
+  hosts: all
+  roles:
+    - rabbitmq

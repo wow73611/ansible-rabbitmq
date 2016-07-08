@@ -1,0 +1,9 @@
+---
+- name: Adding all nodes to the /etc/hosts file
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "^{{hostvars[item].ansible_host}}"
+    insertafter: '127.0.0.1'
+    line: "{{hostvars[item].ansible_host}} {{hostvars[item].ansible_hostname}}"
+  with_items: "{{ groups.rabbitmq_nodes }}"
+

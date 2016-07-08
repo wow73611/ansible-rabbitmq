@@ -1,0 +1,20 @@
+%% -*- mode: erlang -*-
+%% ----------------------------------------------------------------------------
+%% RabbitMQ Sample Configuration File.
+%%
+%% See http://www.rabbitmq.com/configure.html for details.
+%% ----------------------------------------------------------------------------
+[
+  {rabbit, [
+    {loopback_users, []},
+    {vm_memory_high_watermark, 0.4},
+    {cluster_partition_handling, autoheal}
+  ]},
+  {rabbitmq_management, [
+    {rates_mode, detailed}
+  ]},
+  {rabbitmq_shovel,
+    [{shovels, [
+    ]}
+  ]}
+].

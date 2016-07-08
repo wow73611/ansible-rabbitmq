@@ -1,0 +1,26 @@
+---
+rabbitmq_enable_cluster: false
+rabbitmq_cluster_master: localhost
+rabbitmq_apt_key: "http://www.rabbitmq.com/rabbitmq-release-signing-key.asc"
+rabbitmq_apt_repo: "deb http://www.rabbitmq.com/debian testing main"
+rabbitmq_ulimit_open_files: 65535
+
+rabbitmq_erlang_cookie: "ZBETIPWWBHOPUMRIGHNL"
+rabbitmq_erlang_cookie_file: "/var/lib/rabbitmq/.erlang.cookie"
+#rabbitmq_env_conf: []
+
+rabbitmq_plugins:
+  - rabbitmq_management
+
+rabbitmq_remove_users:
+  - guest
+
+rabbitmq_users:
+  - user: admin
+    password: admin
+    vhost: /
+    configure_priv: ".*"
+    read_priv: ".*"
+    write_priv: ".*"
+    tags: administrator
+

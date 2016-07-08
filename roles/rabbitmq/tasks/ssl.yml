@@ -1,0 +1,12 @@
+---
+- name: Installing ssl-cert
+  apt:
+    name: ssl-cert
+    state: present
+
+- name: Adding rabbitmq user to the ssl-cert group
+  user:
+    name: rabbitmq
+    append: yes
+    groups: ssl-cert
+
