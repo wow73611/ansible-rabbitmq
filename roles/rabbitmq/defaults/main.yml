@@ -1,10 +1,26 @@
 ---
 rabbitmq_enable_cluster: false
 rabbitmq_cluster_master: localhost
+
+# For Debian dist
 rabbitmq_apt_key: "http://www.rabbitmq.com/rabbitmq-release-signing-key.asc"
 rabbitmq_apt_repo: "deb http://www.rabbitmq.com/debian testing main"
-rabbitmq_ulimit_open_files: 65535
 
+# For Redhat dist
+rabbitmq_erlang_url: "https://www.rabbitmq.com/releases/erlang/erlang-18.3-1.el7.centos.x86_64.rpm"
+rabbitmq_erlang_path: "/tmp/erlang-18.3-1.el7.centos.x86_64.rpm"
+rabbitmq_rpm_key: "https://www.rabbitmq.com/rabbitmq-release-signing-key.asc"
+rabbitmq_rpm_url: "https://www.rabbitmq.com/releases/rabbitmq-server/v3.5.4/rabbitmq-server-3.5.4-1.noarch.rpm"
+rabbitmq_rpm_path: "/tmp/rabbitmq-server-3.5.4-1.noarch.rpm"
+rabbitmq_firewalls:
+  - 5671-5672/tcp
+  - 15672/tcp
+  - 25672/tcp
+  - 4369/tcp
+  - 61613-61614/tcp
+  - 8883/tcp
+
+rabbitmq_ulimit_open_files: 65535
 rabbitmq_erlang_cookie: "ZBETIPWWBHOPUMRIGHNL"
 rabbitmq_erlang_cookie_file: "/var/lib/rabbitmq/.erlang.cookie"
 #rabbitmq_env_conf: []

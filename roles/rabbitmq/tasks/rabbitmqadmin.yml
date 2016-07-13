@@ -4,8 +4,6 @@
     path: /usr/sbin/rabbitmqadmin
   register: file_check
 
-- debug: var=rabbitmqadmin_check verbosity=2
-
 - name: Installing rabbitmqadmin
   get_url:
     url: http://guest:guest@localhost:15672/cli/rabbitmqadmin
